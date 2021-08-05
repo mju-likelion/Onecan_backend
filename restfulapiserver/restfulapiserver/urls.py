@@ -19,15 +19,9 @@ from django.conf.urls import url, include
 from users import views
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     url(r'^api-auth', include('rest_framework.urls'))
-# ]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('login/', views.login_view),
-    # path('signup/', views.signup_view),
-    # path('logout', views.logout_view),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
