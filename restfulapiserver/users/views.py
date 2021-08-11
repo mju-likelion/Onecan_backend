@@ -6,6 +6,6 @@ from .models import User
 from .serializer import UserSerializer
 from rest_framework.parsers import JSONParser
 from django.contrib import auth
-# Create your views here.
+# Create your views here!
 
 
