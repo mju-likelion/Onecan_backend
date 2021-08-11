@@ -9,9 +9,13 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-from . import my_settings
 from pathlib import Path
 import os
+
+ENV = os.getenv('ENV')
+if ENV != 'PROD':
+    from . import my_settings
+
 # import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,10 +26,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = ''
+if ENV != 'PROD':
+    SECRET_KEY = my_settings.SECRET_KEY
+else:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG', 'True') != 'False')
+DEBUG = True
+if ENV == 'PROD':
+    DEBUG = False
 
 # 모든 주소에서 접근을 허용
 ALLOWED_HOSTS = ['*']
@@ -165,8 +175,18 @@ REST_FRAMEWORK = {
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = ''
+if ENV != 'PROD':
+    SECRET_KEY = my_settings.AWS_ACCESS_KEY_ID
+else:
+    SECRET_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
+
+AWS_SECRET_ACCESS_KEY = ''
+if ENV != 'PROD':
+    SECRET_KEY = my_settings.AWS_SECRET_ACCESS_KEY
+else:
+    SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
 AWS_STORAGE_BUCKET_NAME = 'onecandoit'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = 'ap-northeast-2'
