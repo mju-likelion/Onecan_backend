@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Barter
+from .models import Product
 # Register your models here.
-admin.site.register(Barter)
+
+admin.site.register(Product)

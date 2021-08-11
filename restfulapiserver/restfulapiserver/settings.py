@@ -65,9 +65,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_auth.registration',
-    'cart',
+    'product',
     'recipe',
     'barter',
+    'cart',
 ]
 
 SITE_ID = 1
@@ -177,8 +178,9 @@ REST_FRAMEWORK = {
     ]
 }
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(, 'media')
+# 추가
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -194,6 +196,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # else:
 #     SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'onecandoit'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = 'ap-northeast-2'
