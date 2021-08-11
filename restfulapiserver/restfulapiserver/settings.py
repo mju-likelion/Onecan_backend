@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'cart',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -46,6 +45,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_auth.registration',
+    # 'cart.apps.CartConfig',
+    'cart',
+    'recipe',
+    'barter',
 ]
 
 SITE_ID = 1
@@ -87,7 +90,11 @@ REST_FRAMEWORK = {  # 권한 설정
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+}
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -144,9 +151,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
 
     ]
 }
 
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(, 'media')
