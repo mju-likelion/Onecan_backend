@@ -22,19 +22,17 @@ from rest_framework import routers, serializers, viewsets
 from cart import urls
 from recipe import urls
 from barter import urls
-
-
+# image 업로드 Import
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     # url(r'cart/', include('cart.urls')),
     path('', include('cart.urls')),
     path('', include('recipe.urls')),
     path('', include('barter.urls')),
-]
-
-   
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# static 추가
