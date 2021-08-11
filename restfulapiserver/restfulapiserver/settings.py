@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
+from decouple import config
 import os
 
-ENV = os.getenv('ENV')
-if ENV != 'PROD':
-    from . import my_settings
+# ENV = os.getenv('ENV')
+# if ENV != 'PROD':
+#     from . import my_settings
 
 # import dj_database_url
 
@@ -26,16 +27,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
-if ENV != 'PROD':
-    SECRET_KEY = my_settings.SECRET_KEY
-else:
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+OS_SECRET_KEY = os.environ.get('SECRET_KEY')
+# SE_SECRET_KEY = my_settings.SECRET_KEY
+print(OS_SECRET_KEY, "OS")
+# print(SE_SECRET_KEY, "SE")
 
+SECRET_KEY = config('SECRET_KEY')
+
+print(os.path.join(BASE_DIR, 'db.sqlite3'), "하이")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-if ENV == 'PROD':
-    DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # 모든 주소에서 접근을 허용
 ALLOWED_HOSTS = ['*']
@@ -175,17 +182,17 @@ REST_FRAMEWORK = {
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = ''
-if ENV != 'PROD':
-    SECRET_KEY = my_settings.AWS_ACCESS_KEY_ID
-else:
-    SECRET_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
+# AWS_ACCESS_KEY_ID = ''
+# if ENV != 'PROD':
+#     SECRET_KEY = my_settings.AWS_ACCESS_KEY_ID
+# else:
+#     SECRET_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
 
-AWS_SECRET_ACCESS_KEY = ''
-if ENV != 'PROD':
-    SECRET_KEY = my_settings.AWS_SECRET_ACCESS_KEY
-else:
-    SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+# AWS_SECRET_ACCESS_KEY = ''
+# if ENV != 'PROD':
+#     SECRET_KEY = my_settings.AWS_SECRET_ACCESS_KEY
+# else:
+#     SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 AWS_STORAGE_BUCKET_NAME = 'onecandoit'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
