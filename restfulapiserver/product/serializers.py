@@ -15,10 +15,11 @@
 #         )
 #         read_only_fields = ('created_at',)
 
-from .models import Cart
+from .models import Product
 from rest_framework import serializers
 
-class CartSerializer(serializers.ModelSerializer):
+
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cart
+        model = Product
         fields = '__all__'

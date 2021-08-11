@@ -9,15 +9,15 @@
 # ]
 
 from django.urls import path, include
-from .views import CartViewSet
+from .views import ProductViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 # 첫 번째 인자는 url의 prefix
 # 두 번째 인자는 ViewSet
-router.register('cart', CartViewSet)
+router.register('product', ProductViewSet)
 
-urlpatterns =[
+urlpatterns = [
     path('', include(router.urls))
 ]
 

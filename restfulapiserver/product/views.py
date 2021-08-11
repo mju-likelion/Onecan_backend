@@ -17,7 +17,7 @@
 #             serializer.save()
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
- 
+
 #     #   """
 #     #     카트 리스트 조회
 #     #   """
@@ -32,12 +32,12 @@
 #             return Cart.objects.get(pk=pk)
 #         except :
 #             raise Http404
- 
+
 #     def get(self, request, pk):
 #         cart = self.get_object(pk)
 #         serializer = CartSerializer(cart)
 #         return Response(serializer.data)
- 
+
 #     def put(self, request, pk, format=None):
 #         cart = self.get_object(pk)
 #         serializer = CartSerializer(cart, data=request.data)
@@ -45,17 +45,19 @@
 #             serializer.save()
 #             return Response(serializer.data)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
- 
+
 #     def delete(self, request, pk, format=None):
 #         cart = self.get_object(pk)
 #         cart.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
-from .models import Cart
-from .serializers import CartSerializer
+from .models import Product
+from .serializers import ProductSerializer
 from rest_framework import viewsets
 
 # Blog의 목록, detail 보여주기, 수정하기, 삭제하기 모두 가능
-class CartViewSet(viewsets.ModelViewSet):
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
