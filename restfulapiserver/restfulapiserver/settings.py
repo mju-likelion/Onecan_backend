@@ -28,11 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 OS_SECRET_KEY = os.environ.get('SECRET_KEY')
-# SE_SECRET_KEY = my_settings.SECRET_KEY
-print(OS_SECRET_KEY, "OS")
-# print(SE_SECRET_KEY, "SE")
 
 SECRET_KEY = config('SECRET_KEY')
+print(SECRET_KEY)
 
 print(os.path.join(BASE_DIR, 'db.sqlite3'), "하이")
 # SECURITY WARNING: don't run with debug turned on in production!
