@@ -41,7 +41,7 @@ DATABASES = {
 }
 
 # 모든 주소에서 접근을 허용
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['polar-eyrie-90046.herokuapp.com']
 
 
 # Application definition
