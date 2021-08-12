@@ -1,1 +1,1 @@
-web: gunicorn restfulapiserver.wsgi:application --log-file -
+web: gunicorn restfulapiserver.wsgi --log-file -
