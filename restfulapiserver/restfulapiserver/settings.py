@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
-from decouple import config
+# from decouple import config
 import os
 import dj_database_url
 
@@ -28,11 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-print(os.path.join(BASE_DIR, 'db.sqlite3'), "하이")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+
+# DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = (os.environ.get('DEBUG', 'True') != 'False')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -41,7 +43,7 @@ DATABASES = {
 }
 
 # 모든 주소에서 접근을 허용
-ALLOWED_HOSTS = ['polar-eyrie-90046.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -192,8 +194,8 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # else:
 #     SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'onecandoit'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = 'ap-northeast-2'
