@@ -34,5 +34,6 @@ urlpatterns = [
     path('', include('product.urls')),
     path('', include('recipe.urls')),
     path('', include('barter.urls')),
+    path('', include('new_product.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # static 추가
