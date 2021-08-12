@@ -101,7 +101,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'restfulapiserver.wsgi.application'
+WSGI_APPLICATION = 'restfulapiserver/restfulapiserver.wsgi.application'
 
 
 REST_FRAMEWORK = {  # 권한 설정
