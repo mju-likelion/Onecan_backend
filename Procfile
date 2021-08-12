@@ -1,1 +1,0 @@
-web: gunicorn restfulapiserver.wsgi --log-file -
