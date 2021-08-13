@@ -9,3 +9,5 @@ class New_product(models.Model):
     content = models.TextField()
     image = models.ImageField(default="")
 
+    def __str__(self):
+        return self.product
