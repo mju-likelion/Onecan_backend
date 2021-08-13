@@ -13,3 +13,6 @@ class Product(models.Model):
     price = models.CharField(max_length=100)
     content = models.TextField()
     image = models.ImageField(default="")
+
+    def __str__(self):
+        return self.product
